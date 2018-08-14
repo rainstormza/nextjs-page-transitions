@@ -1,0 +1,20 @@
+// @flow
+
+// note: I can't get flow to recognize react-cosmos without manually putting this file (extracted from react-cosmos-flow)
+
+import type { Node, ComponentType, ElementRef } from 'react';
+
+declare module 'react-cosmos' {
+  declare type FixtureType<P: {}> = {
+    component: ComponentType<P>,
+    name?: string,
+    namespace?: string,
+    props?: P,
+    children?: Node,
+    init?: ({ compRef: ?ElementRef<ComponentType<P>> }) => Promise<any>,
+  };
+
+  declare export function createFixture<P: {}, F: FixtureType<P>>(
+    fixture: F
+  ): F;
+}
