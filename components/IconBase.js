@@ -1,11 +1,23 @@
-import React from 'react';
+// @flow
 
-export default class Svg extends React.Component {
+import * as React from 'react';
+import styled from 'styled-components';
+
+type Props = {
+  children: React.Node,
+  width?: number,
+  height?: number,
+  iconName?: string,
+  iconColor?: string,
+  className?: string,
+};
+
+export default class Svg extends React.Component<Props> {
   static defaultProps = {
-    iconName: 'box',
     width: 18,
     height: 18,
-    iconColor: 'currentColor',
+    iconName: 'box',
+    iconColor: 'mediumseagreen',
   };
 
   render() {
@@ -18,7 +30,7 @@ export default class Svg extends React.Component {
       className,
     } = this.props;
     return (
-      <svg
+      <FormattedSvg
         xmlns="http://www.w3.org/2000/svg"
         width={width}
         height={height}
@@ -31,20 +43,19 @@ export default class Svg extends React.Component {
           {iconName} icon
         </title>
         <g fill={iconColor}>{children}</g>
-        <style jsx>{`
-          svg {
-            display: inline-block;
-            vertical-align: baseline;
-            /*
-              Sarah in the original app about the next line:
-                "yes, I'm that particular about formatting"
-              Xavier adapting to NextJS:
-                "this component is dope"
-            */
-            margin-bottom: -2px;
-          }
-        `}</style>
-      </svg>
+      </FormattedSvg>
     );
   }
 }
+
+const FormattedSvg = styled.svg`
+  display: inline-block;
+  vertical-align: baseline;
+  /*
+    Sarah in the original app about the next line:
+      "yes, I'm that particular about formatting"
+    Xavier adapting to NextJS:
+      "🙌"
+  */
+  margin-bottom: -2px;
+`;
